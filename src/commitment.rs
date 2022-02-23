@@ -1,5 +1,7 @@
+/*File with the implementation of the homomorphic commitment presented in https://eprint.iacr.org/2018/560*/
+
+#![allow(non_snake_case)]
 use crate::linearalgebra::{Vec2d,normal_vec2d,Transpose,Pad,Modq,Sum};
-use crate::polynomial::Polynomial;
 
 
 ///CommitKey is the structure that represents the components of the commitment key based on SIS problem.
@@ -65,7 +67,7 @@ pub trait Commitment<T> {
 ///  (Commitment, randomness)
 
 impl Commitment<Vec2d> for SisCommitment{
-    fn commitment(&self,ck:&CommitKey,mut m: &Vec2d)-> (Vec2d,Vec2d){
+    fn commitment(&self,ck:&CommitKey,m: &Vec2d)-> (Vec2d,Vec2d){
         
         let log=(2.0_f64*((self.Q as f64).log(self.q as f64))).ceil() as usize;
         let r=normal_vec2d(m.clone().N, log, self.q).transpose();

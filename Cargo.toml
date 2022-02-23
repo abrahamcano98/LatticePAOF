@@ -13,10 +13,14 @@ path = "src/lib.rs"
 rand="0.8.4"
 
 [[example]]
-name = "RLWE"
+name = "rlwe"
 path= "examples/RLWEex.rs"
 
 [[example]]
-name="Commitment"
+name="commitment"
 path="examples/commitmentex.rs"
+
+[[example]]
+name="zkpk"
+path="examples/ZKPKex.rs"
 

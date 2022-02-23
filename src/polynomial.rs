@@ -1,3 +1,6 @@
+/* This file contains the necessary traits to performs polynomial operations over the ring Zq[x]/<x^n+1>*/
+#![allow(non_snake_case)]
+
 use std::ops::{Mul,Add,Sub};
 use crate::linearalgebra::{Vec1d,Modq as Modqla,Pad,circulant_mat,MattoVec,normal_vec1d,gauss_vec1d};
 

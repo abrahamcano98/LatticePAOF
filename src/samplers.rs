@@ -1,3 +1,6 @@
+/* This file contains the sampling of discrete gaussian distributions as presented in https://ieeexplore.ieee.org/document/8314133 */
+#![allow(non_snake_case)]
+
 use rand::{distributions::Uniform, Rng};
 use std::collections::HashMap;
 use core::f64::consts::{E,PI};

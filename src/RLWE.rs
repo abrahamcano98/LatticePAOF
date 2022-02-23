@@ -1,3 +1,6 @@
+/*This file contains the implementation of the Ring Learning With Errors encryption scheme presented in https://eprint.iacr.org/2012/230*/
+#![allow(non_snake_case)]
+
 use crate::linearalgebra::Vec1d;
 use crate::polynomial::{Polynomial,normal_pol,gauss_pol};
 

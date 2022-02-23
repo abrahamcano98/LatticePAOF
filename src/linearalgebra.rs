@@ -1,4 +1,5 @@
 /*This file contains  the minimal functions and traits to perform linear algebra operations over finite fields"*/
+#![allow(non_snake_case)]
 
 use std::ops::{Mul,Add,Sub};
 use crate::samplers;
