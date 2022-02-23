@@ -1,10 +1,10 @@
 # LatticePAOF
-Polynomial arithmetic over finite fields for lattice-based encryption schemes
+Polynomial arithmetic over finite fields for lattice-based encryption schemes library.
 
 # Installing
 ### Via cargo
 ```
-cargo install --git https://github.com/abrahamcano98/BTC-USD-ws
+cargo install --git https://github.com/abrahamcano98/LatticePAOF
 ```
 ### Via git
 ```
