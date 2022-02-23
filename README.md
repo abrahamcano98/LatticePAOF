@@ -23,9 +23,12 @@ $ cargo build
 # Basic usage
 ## Examples
 The examples may be run by:
-cargo run --example rlwe (Ring Learning With Errors encryption scheme)
-cargo run --example commitment (Homomorphic commitment scheme)
-cargo run --example zkpk (Amortized zero knowdledge proof of knowledge)
+
+```cargo run --example rlwe``` (Ring Learning With Errors encryption scheme)
+
+```cargo run --example commitment``` (Homomorphic commitment scheme)
+
+```cargo run --example zkpk``` (Amortized zero knowdledge proof of knowledge)
 ### Using traits, functions or structs in other files.
 ```use PAOF::mod::{element};```
 
