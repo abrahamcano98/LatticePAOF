@@ -35,4 +35,9 @@ The examples may be run by:
 For instance for using the function gauss_vec2d in the linearalgebra mod, type:
 
 ```use PAOF::linearalgebra::gauss_vec2d;```
+# References 
+- [RLWE](https://eprint.iacr.org/2012/230.pdf)
+- [Commitment and Zero Knowledge proof of Knowledge](https://eprint.iacr.org/2018/560.pdf)
+- [Gaussian Discrete Sampling](https://www.sav.sk/journals/uploads/0212094402follat.pdf)
+
 
