@@ -3,6 +3,7 @@
 
 use crate::linearalgebra::Vec1d;
 use crate::polynomial::{Polynomial,normal_pol,gauss_pol};
+use std::ops::{Add};
 
 ///RLWE is the struct that represents the parameters employed to encrypt a message over Zq[x]/<x^n+1>
 
@@ -48,7 +49,7 @@ impl KeyGen<Key> for RLWE{
 }
 /// Definition of the trait Encryption. It generates a ciphertext given a plaintext message m and a pk.
 pub trait Encryption<T,U> {
-    fn encryption(&self,pk:(Polynomial,Polynomial),m:T)-> U;
+    fn encryption(&self,pk:&(Polynomial,Polynomial),m:&T)-> U;
 }
 /// Implementation of Encryption for RLWE.
 ///u=a*r+e1
@@ -64,16 +65,16 @@ pub trait Encryption<T,U> {
 ///
 ///  Ciphertext structure.
 impl Encryption<Polynomial,Ciphertext> for RLWE{
-    fn encryption(&self,pk:(Polynomial,Polynomial),m:Polynomial)->Ciphertext{
-        let a=pk.0;
-        let b=pk.1;
-        let r=gauss_pol(self.n, self.q,self.mu,self.sigma,self.t, self.precision);
-        let e1=gauss_pol(self.n, self.q,self.mu,self.sigma,self.t, self.precision);
-        let e2=gauss_pol(self.n, self.q,self.mu,self.sigma,self.t, self.precision);
+    fn encryption(&self,pk:&(Polynomial,Polynomial),m:&Polynomial)->Ciphertext{
+        let a=&pk.0;
+        let b=&pk.1;
+        let r=&gauss_pol(self.n, self.q,self.mu,self.sigma,self.t, self.precision);
+        let e1=&gauss_pol(self.n, self.q,self.mu,self.sigma,self.t, self.precision);
+        let e2=&gauss_pol(self.n, self.q,self.mu,self.sigma,self.t, self.precision);
         let qhr=(self.q as f64/2.0).ceil() as i64;
        
-        let u=&(&a*&r)+&e1; 
-        let v=&(&(&b*&r)+&e2)+&(qhr*&m);
+        let u=&(a*r)+&e1; 
+        let v=&(&(b*r)+e2)+&(qhr*m);
         
        
         Ciphertext{u:u,v:v}
@@ -81,7 +82,7 @@ impl Encryption<Polynomial,Ciphertext> for RLWE{
 }
 /// Definition of the trait Decryption. It generates a plaintext given a ciphertext and a secret key.
 pub trait Decryption<T,U> {
-    fn decryption(&self,sk:Polynomial,c:T)-> U;
+    fn decryption(&self,sk:&Polynomial,c:&T)-> U;
 }
 /// Implementation of Decryption for RLWE.
 ///
@@ -98,10 +99,10 @@ pub trait Decryption<T,U> {
 ///  Plaintext message.
 
 impl Decryption<Ciphertext,Polynomial> for RLWE{
-    fn decryption(&self,sk:Polynomial,c:Ciphertext)->Polynomial{
-        let u=c.u;
-        let v=c.v;
-        let m=&v-&(&u*&sk);
+    fn decryption(&self,sk:&Polynomial,c:&Ciphertext)->Polynomial{
+        let u=&c.u;
+        let v=&c.v;
+        let m=v-&(u*sk);
         let qhr=(self.q as f64/2.0).ceil();
         let m_cen=(0..self.n).map(|i| {
             if m.coeffs.0[i as usize]<qhr as i64{
@@ -110,5 +111,28 @@ impl Decryption<Ciphertext,Polynomial> for RLWE{
             m.coeffs.0[i as usize]-self.q
         }}).collect::<Vec<i64>>();
         Polynomial::new(self.n,self.q,Vec1d((0..self.n).map(|i| (m_cen[i as usize] as f64/(self.q as f64/4.0)).abs() as i64).collect::<Vec<i64>>()))
+    }
+}
+/// Rust build-in trait to perform the addition of two Ciphertexts
+///
+///
+////// Arguments:
+///
+/// V:&Ciphertext: Reference to a Ciphertext instance.
+///
+///
+/// Return:
+///
+/// Given c0=(u0,v0) and c1=(u1,v1), it returns c2=c0+c1=(u0+u1,v0+v1)
+
+impl Add<&Ciphertext> for &Ciphertext
+{
+    type Output = Ciphertext;
+
+    fn add(self, v: &Ciphertext) -> Ciphertext  {
+        Ciphertext{
+            u:(&self.u+&v.u),
+            v:(&self.v+&v.v),
+        }
     }
 }
