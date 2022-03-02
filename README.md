@@ -39,5 +39,6 @@ For instance for using the function gauss_vec2d in the linearalgebra mod, type:
 - [RLWE](https://eprint.iacr.org/2012/230.pdf)
 - [Commitment and Zero Knowledge proof of Knowledge](https://eprint.iacr.org/2018/560.pdf)
 - [Gaussian Discrete Sampling](https://www.sav.sk/journals/uploads/0212094402follat.pdf)
+- [BFV scheme](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.400.6346&rep=rep1&type=pdf)
 
 
