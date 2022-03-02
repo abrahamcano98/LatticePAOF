@@ -7,3 +7,4 @@ pub mod linearalgebraf;
 pub mod samplers;
 pub mod polynomial;
 pub mod ZKPK;
+pub mod FV;

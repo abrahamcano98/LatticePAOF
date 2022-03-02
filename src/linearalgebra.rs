@@ -423,6 +423,23 @@ impl Modq<usize> for usize{
         ((self%q)+q)%q 
     }
 }
+///Implementation of trait Modq for usize
+///
+///Arguments
+///
+///q:usize Ring modulus q
+///
+/// Basic usage:
+///
+///let a=5;
+///let q=2;
+/// let aq=a.mod_q(q);
+impl Modq<i64> for i64{
+    fn mod_q(&self, q:i64)->i64{
+        
+        ((self%q)+q)%q 
+    }
+}
 ///Implementation of trait Modq for Vec1d
 ///
 ///Arguments
